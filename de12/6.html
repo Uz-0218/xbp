@@ -4,24 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プログラミング</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f7f9fc;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>プログラミング</h1>
-    <p>
-        とあるサイトのページが更新されたらメールに通知がくるシステムをmiyuちゃんと協力してつくっていたのですが、
-        メールアドレスのパスワードというものを設定していなかったのでメールが来ず、失敗に終わってしまいました。
-    </p>
-    <p>
-        調べてみたら、Gmailの2段階認証を設定をしたらできると書いてあったので、設定をしてみたのですがうまくいきませんでした。
-    </p>
-    <p>
-        自分オリジナルの方も最初は作っていたのですが、そっちはより難しかったため、また改めて挑戦したいと思います。
-    </p>
-    <p>
-        miyuちゃんの課題のページはこちら: 
-        <a href="https://0414miyu.github.io/xbp/de12/Python2.html" target="_blank">
-            課題ページ
-        </a>
-    </p>
+    <div class="content">
+        <h1>プログラミング</h1>
+        <p>
+            スマートフォンの在庫状況が更新された際に、自動で通知を送信するプログラムを作成しました。
+            このプログラムによって毎日手動でページを確認する手間を省きました。
+        </p>
+
+        <h2>作成理由</h2>
+        <p>
+        　　現在スマートフォンを新しくしようと思っており、非常にお得なキャンペーンを活用して乗り換えを検討していました。
+            しかし、キャンペーン対象の在庫がずっと「在庫なし」の状態で、毎日確認する作業が煩雑でストレスでした。  
+            そのため、自動で在庫が追加された際に通知が来るプログラムを作ることで、この作業を効率化しようと考えました。
+        </p>
+
+        <h2>プログラムの流れ</h2>
+        
+            <li>対象の在庫ページを定期的にチェック</li>
+            <li>在庫情報が変化した際に変更内容を検出</li>
+            <li>「在庫あり」になった場合にメールで通知</li>
+
+        <p>特に、「ピンク」と「ブラック」という2つのカラーの在庫を重点的に監視しています。</p>
+
+        <h2>プログラムコード</h2>
+        <p>以下が実際に使用したコードの一部です。</p>
+        <pre><code>
+            import requests
+            from bs4 import BeautifulSoup
+            import smtplib
+            from email.mime.text import MIMEText
+            from email.mime.multipart import MIMEMultipart
+            import time
+            import schedule
+            
+            # メール通知の設定
+            SMTP_SERVER = 'smtp.gmail.com'
+            SMTP_PORT = 587
+            EMAIL_ADDRESS = 'sys.klavier1024@gmail.com' 
+            EMAIL_PASSWORD = 'uspc uqhp qldu yzvs'  # アプリパスワード
+            
+            TO_EMAIL = 'sys.klavier1024@gmail.com'
+            
+            # 監視対象URL
+            TARGET_URL = 'https://online-shop.mb.softbank.jp/sbols/ModelPlanSelectPage'
+            
+            # 前回の在庫状況を記録
+            previous_stock = {}
+            
+            # 在庫情報を取得する関数
+            def check_stock():
+                global previous_stock
+                response = requests.get(TARGET_URL)
+                soup = BeautifulSoup(response.text, 'html.parser')
+            
+                # 在庫情報を取得
+                items = soup.find_all('div', class_='button-size')
+                current_stock = {}
+                for item in items:
+                    name = item.find('span', class_='name').find_all('span')[0].text  # 商品名
+                    status = item.find('span', class_='name').find_all('span')[1].text  # 在庫状況
+                    current_stock[name] = status
+            
+                # 在庫の変化を検出
+                changes = []
+                for name, status in current_stock.items():
+                    if name in previous_stock and previous_stock[name] != status:
+                        if status == "在庫あり":  # 在庫が追加された場合のみ通知
+                            changes.append(name)
+            
+                # 在庫の変化をメールで通知
+                if changes:
+                    send_email_notification(changes)
+            
+                # 現在の在庫状況を保存
+                previous_stock = current_stock
+            
+            # メール通知を送信する関数
+            def send_email_notification(changes):
+                subject = "在庫通知: 新しい在庫が追加されました"
+                body = f"以下の商品に在庫が追加されました:\n\n" + "\n".join(changes)
+            
+                # メールの内容を構築
+                message = MIMEMultipart()
+                message['From'] = EMAIL_ADDRESS
+                message['To'] = TO_EMAIL
+                message['Subject'] = subject
+                message.attach(MIMEText(body, 'plain'))
+            
+                # メールを送信
+                with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                    server.starttls()
+                    server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+                    server.send_message(message)
+            
+                print(f"通知を送信しました: {changes}")
+            
+            # 定期的に在庫をチェック
+            schedule.every(10).minutes.do(check_stock)  # 10分ごとに実行
+            
+            # プログラムを実行
+            print("在庫監視を開始します...")
+            while True:
+                schedule.run_pending()
+                time.sleep(1)
+            
+        </code></pre>
+
+        <h2>結果</h2>
+        <p>
+            このプログラムを実行することで、在庫が追加された場合に即座に通知が届くようにしました。
+            実際に使ってみるまではまだ至っていませんが、もう少し修正して使えるようにしたいと思います。
+
+        <h2>感想</h2>
+        <p>
+            この課題を通じて、スクレイピングの技術やメール送信システムの構築方法を学びました。
+            初めはウェブページのHTML構造を解析するのが難しかったですが、BeautifulSoupを活用することで効率的に情報を取得できました。 
+            今後は、異なる通知方法（例: Slack通知）にも拡張していきたいです。
+        </p>
+    </div>
 </body>
 </html>

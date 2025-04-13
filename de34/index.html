@@ -1,13 +1,127 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>XBP_HPsample</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="./images/xbp.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デザイン演習Ⅲ.Ⅳ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #111;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    .assignment-list h2 {
+      font-size: 1.5rem;
+      color: #222;
+      margin-bottom: 1rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 1.2rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: #111;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: #333;
+      border-bottom: 1px solid #aaa;
+    }
+
+    .card a:hover {
+      color: #000;
+      border-color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+  </style>
 </head>
 <body>
-    <logotohome>
-    <a href="../index.html"><img src="./images/0_XBlogo.png" alt=""></a>
-    </logotohome>
-    <h1>デザイン演習Ⅲ・Ⅳ</h1>
+  <header>
+    <h1>デザイン演習Ⅲ.Ⅳ</h1>
+    
+  </header>
+
+  <main>
+    <section class="assignment-list">
+      <h2>課題一覧</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>課題1：○○○</h3>
+          <p></p>
+          <a href="#">詳しく見る →</a>
+        </div>
+        <div class="card">
+          <h3>課題2：</h3>
+          <p></p>
+          <a href="#">詳しく見る →</a>
+        </div>
+        <!-- ここに課題を追加していけます -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 デザイン演習Ⅲ.Ⅳ</p>
+  </footer>
+</body>
+</html>

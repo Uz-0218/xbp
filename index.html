@@ -1,28 +1,123 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>たあ坊</title>
-    <link rel="stylesheet" href="./css/style.css">
+  <meta charset="UTF-8">
+  <title>たあ坊</title>
+  <style>
+
+    body {
+      background: linear-gradient(135deg, #f8f1f2, #ffffff);
+      color: #333;
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      margin: 0;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    
+    logotohome img {
+      width: 100px;
+      height: auto;
+      filter: grayscale(100%);
+      margin-bottom: 30px;
+      transition: transform 0.3s;
+    }
+
+    logotohome img:hover {
+      transform: scale(1.1);
+    }
+
+ 
+    h1 {
+      font-size: 3rem;
+      margin: 10px 0;
+      color: #555;
+      position: relative;
+    }
+
+  
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #aa6677;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 20px 0 40px;
+      color: #666;
+      text-align: center;
+    }
+
+    ol {
+      background: #ffffffcc;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+ 
+    li {
+      list-style: decimal inside;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      position: relative;
+    }
+
+ 
+    li a {
+      text-decoration: none;
+      color: #aa6677;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.3s;
+    }
+
+    li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: #aa6677;
+      transition: width 0.3s;
+    }
+
+    li a:hover {
+      color: #555;
+    }
+
+    li a:hover::after {
+      width: 100%;
+    }
+
+  </style>
 </head>
+
 <body>
-    <logotohome>
-    <a href="./index.html"><img src="./images/0_XBlogo.png" alt=""></a>
-    </logotohome>
-    <h1>XBP</h1>
-        <h2>たあ坊のXBPポートフォリオ一覧</h2>
-        <!-- このようにするとコードとして認識されない。（メモができる）-->
-        <!--番号付きのリスト-->
-        <ol>
-            <li><a href="./de12/index.html">デザイン演習Ⅰ・Ⅱ</a></li>
-            <li><a href="./digi_fab/index.html">デジタルファブリケーション</a></li>
-            <li><a href="./de34/index.html">デザイン演習Ⅲ・Ⅳ</a></li>
-        </ol>
+  <logotohome>
+    <a href="./index.html"><img src="./images/0_XBlogo.png" alt="ロゴ"></a>
+  </logotohome>
 
-            
-        <br>
-        <br>
+  <h1>XBP</h1>
+  <h2>たあ坊のXBPポートフォリオ一覧</h2>
 
+  <ol>
+    <li><a href="./de12/index.html">デザイン演習Ⅰ・Ⅱ</a></li>
+    <li><a href="./digi_fab/index.html">デジタルファブリケーション</a></li>
+    <li><a href="./de34/index.html">デザイン演習Ⅲ・Ⅳ</a></li>
+  </ol>
 
 </body>
 </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課題3｜デザイン演習Ⅲ.Ⅳ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      color: #666;
+      text-decoration: none;
+      border-bottom: 1px solid #aaa;
+    }
+
+    .back-link:hover {
+      color: #000;
+      border-color: #000;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .image-gallery img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background-color: #fff;
+    }
+
+    .link-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .link-section a {
+      display: inline-block;
+      font-size: 1rem;
+      color: #0066cc;
+      text-decoration: none;
+      border-bottom: 1px solid #0066cc;
+    }
+
+    .link-section a:hover {
+      color: #004999;
+      border-color: #004999;
+    }
+
+    .analysis-description {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    @media (max-width: 768px) {
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>課題3：コレスポンデンス分析,クラスター分析</h1>
+    <a class="back-link" href="index.html">← トップページに戻る</a>
+  </header>
+
+  <main>
+    <p class="description">
+      授業内で作成した資料です。
+    </p>
+
+    <section class="image-gallery">
+      <img src="./images/1747590642969-fbd87641-0560-464c-9f35-95a85e6b3d94_1.jpg" alt="資料1">
+      <img src="./images/1747590642969-fbd87641-0560-464c-9f35-95a85e6b3d94_2.jpg" alt="資料2">
+      <img src="./images/1747590642969-fbd87641-0560-464c-9f35-95a85e6b3d94_3.jpg" alt="資料3">
+      <img src="./images/1747590642969-fbd87641-0560-464c-9f35-95a85e6b3d94_4.jpg" alt="資料4">
+      <img src="./images/1747590642969-fbd87641-0560-464c-9f35-95a85e6b3d94_5.jpg" alt="資料5">
+    </section>
+
+    <section class="link-section">
+      <a href="./files/カフェブランド比較.csv" download>クロス集計表（CSVファイル）をダウンロード</a>
+    </section>
+
+    <section class="analysis-description">
+      <p>
+        累積寄与率がかなり低い結果となってしまったが、クラスター分析の方は意外と見やすく分かりやすい結果になったのでよかったです！
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 デザイン演習Ⅲ.Ⅳ</p>
+  </footer>
+</body>
+</html>
